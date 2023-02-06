@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  const lineChannelId = String.fromEnvironment('LINE_CHANNEL_ID');
+  LineSDK.instance.setup(lineChannelId).then((_) {
+    print("LINE SDK prepared with channel ID: $lineChannelId");
+  });
+
   runApp(const MyApp());
 }
 
@@ -11,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter LINE Login Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
