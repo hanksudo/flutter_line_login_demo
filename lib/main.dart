@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_line_sdk/flutter_line_sdk.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,6 +69,26 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _signIn() async {
+    try {
+      final result = await LineSDK.instance.login();
+      print(result.userProfile?.data);
+      print(result.userProfile?.userId);
+      print(result.userProfile?.pictureUrl);
+      print(result.userProfile?.displayName);
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void _singOut() async {
+    try {
+      await LineSDK.instance.logout();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -102,6 +123,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            ElevatedButton(
+                onPressed: _signIn, child: const Text('Login by LINE')),
             const Text(
               'You have pushed the button this many times:',
             ),
