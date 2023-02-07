@@ -1,6 +1,6 @@
-# flutter_line_login_example
+# flutter_line_login_demo
 
-Flutter example for LINE login.
+Demostrate LINE login on Flutter.
 
 ## Getting Started
 
