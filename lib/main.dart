@@ -71,11 +71,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _signIn() async {
     try {
-      final result = await LineSDK.instance.login();
+      final result =
+          await LineSDK.instance.login(scopes: ["profile", "openid", "email"]);
       print(result.userProfile?.data);
       print(result.userProfile?.userId);
       print(result.userProfile?.pictureUrl);
       print(result.userProfile?.displayName);
+      print(result.accessToken.email);
     } on PlatformException catch (e) {
       print(e.toString());
     }
